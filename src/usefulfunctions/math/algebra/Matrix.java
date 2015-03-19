@@ -16,4 +16,14 @@ public class Matrix
   {
     this.data = data;
   }
+  
+  public int getNumCols()
+  {
+    return cols;
+  }
+  
+  public int getNumRows()
+  {
+    return rows;
+  }
 }
