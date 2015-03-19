@@ -26,4 +26,26 @@ public class Matrix
   {
     return rows;
   }
+  
+  class Coordinate
+  {
+    private int row;
+    private int col;
+    
+    public Coordinate(int row, int col)
+    {
+      this.row = row;
+      this.col = col;
+    }
+    
+    public double getValueAtCoord(Coordinate c)
+    {
+      return data[c.row][c.col];
+    }
+    
+    public void setValueAtCoord(Coordinate c, double val)
+    {
+      data[c.row][c.col] = val;
+    }
+  }
 }
