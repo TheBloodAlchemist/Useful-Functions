@@ -107,35 +107,40 @@ public class Matrix
 	//currently being worked on
 	public void rref()
 	{
-		Matrix m = setTo(data);
-		m.ref();
-		Coordinate pivot = new Coordinate(0, 0);
-		
-		int smatrix = 0;
-		for(int x = 0; x < m.getNumRows(); x++)
+		ref();
+		Coordinate pivot = new Coordinate(0,0);
+
+		int submatrix = 0;
+		for (int x = 0; x < data[0].length; x++) 
 		{
-			for(int i = pivot.row; i >= 0; i--)
+			pivot = new Coordinate(pivot.row, x);
+			for (int i = pivot.row; i >= 0; i--)
 			{
-				if(i == pivot.row)
+				if (i == pivot.row) 
 				{
-					if(m.getValueAt(pivot) != 1.0)
+					if (getValueAt(pivot) != 1.0) 
 					{
-						m.scaleRow(pivot.row, 1 / m.getValueAt(pivot));
+						scaleRow(pivot.row, 1 / getValueAt(pivot));	
 					}
 					continue;
 				}
-				if(i == pivot.row)
+				if (i == pivot.row) 
 				{
 					continue;
 				}
-				Coordinate abovePiv = new Coordinate(i, pivot.col);
-				double complement = -getValueAt(abovePiv) / getValueAt(pivot);
-				m.scaleRowAdd(complement, pivot.row, abovePiv.row);
+		
+				Coordinate abovePivot = new Coordinate(i, pivot.col);
+				double complement = (-getValueAt(abovePivot) / getValueAt(pivot));
+				scaleRowAdd(complement, pivot.row, abovePivot.row);
 			}
-			
-			smatrix++;
+	
+			if ((pivot.row + 1) >= data.length || isRowZeroes(new Coordinate(pivot.row+1, pivot.col))) 
+			{
+				break;
+			}
+			submatrix++;
 			pivot.row++;
-		}
+		}	
 	}
 	
 	public Coordinate findPivot(Coordinate a)
